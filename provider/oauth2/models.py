@@ -17,7 +17,9 @@ try:
 except ImportError:
     timezone = None
 
-AUTH_USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
+AUTH_USER_MODEL = getattr(settings, 'OAUTH2_USER_MODEL', None)
+if not AUTH_USER_MODEL:
+    AUTH_USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
 
 
 class Client(models.Model):
