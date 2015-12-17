@@ -9,7 +9,7 @@ from django.conf import settings
 class Migration(migrations.Migration):
 
     dependencies = [
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        migrations.swappable_dependency(settings.OAUTH2_USER_MODEL),
     ]
 
     operations = [
@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
                 ('client_id', models.CharField(default=provider.utils.short_token, max_length=255)),
                 ('client_secret', models.CharField(default=provider.utils.long_token, max_length=255)),
                 ('client_type', models.IntegerField(choices=[(0, b'Confidential (Web applications)'), (1, b'Public (Native and JS applications)')])),
-                ('user', models.ForeignKey(related_name='oauth2_client', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
+                ('user', models.ForeignKey(related_name='oauth2_client', blank=True, to=settings.OAUTH2_USER_MODEL, null=True)),
             ],
             options={
             },
@@ -50,7 +50,7 @@ class Migration(migrations.Migration):
                 ('redirect_uri', models.CharField(max_length=255, blank=True)),
                 ('scope', models.IntegerField(default=0)),
                 ('client', models.ForeignKey(to='oauth2.Client')),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('user', models.ForeignKey(to=settings.OAUTH2_USER_MODEL)),
             ],
             options={
             },
@@ -64,7 +64,7 @@ class Migration(migrations.Migration):
                 ('expired', models.BooleanField(default=False)),
                 ('access_token', models.OneToOneField(related_name='refresh_token', to='oauth2.AccessToken')),
                 ('client', models.ForeignKey(to='oauth2.Client')),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('user', models.ForeignKey(to=settings.OAUTH2_USER_MODEL)),
             ],
             options={
             },
@@ -79,7 +79,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='accesstoken',
             name='user',
-            field=models.ForeignKey(to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(to=settings.OAUTH2_USER_MODEL),
             preserve_default=True,
         ),
     ]
